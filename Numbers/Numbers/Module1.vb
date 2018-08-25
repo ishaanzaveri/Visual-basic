@@ -4,6 +4,8 @@
         Dim number As Integer
         Console.WriteLine("Please enter a number")
         number = Console.ReadLine()
+        'Console.WriteLine(Factorial(number) & " is the factorial")
+        Console.WriteLine(binary(number) & " is binary")
         Triangle()
         rhombus()
         ' Is Automorphic ?
@@ -97,5 +99,22 @@
             isAuto = vbTrue
         End If
         Return isAuto
+    End Function
+    Function Factorial(ByRef number) As Integer
+        Dim fact As Integer = 1
+        For i = 1 To number
+            fact = fact * i
+        Next
+        Return fact
+    End Function
+    Function binary(ByRef number) As Integer
+        Dim bin As Integer = 0
+        For i = 7 To 0 Step -1
+            If 2 ^ i <= number Then
+                number = number - 2 ^ i
+                bin = bin + 10 ^ i
+            End If
+        Next
+        Return bin
     End Function
 End Module
