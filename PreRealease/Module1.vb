@@ -17,16 +17,18 @@
 
         Console.WriteLine("Name                    Email") '10+5=25
         For i = 1 To 3
-            For j = 1 To Len(ArrNameEmail(i))
-                If Mid(ArrNameEmail(i), j, 1) = "#" Then
-                    hashno = j
-                End If
-            Next
-            Console.Write(Left(ArrNameEmail(i), hashno - 1) & Space(25 - hashno)
-            Console.Write(Right(ArrNameEmail(i), Len(ArrNameEmail(i)) - hashno))
-            Console.WriteLine()
+            If ArrNameEmail(i) <> "" Then
+                For j = 1 To Len(ArrNameEmail(i))
+                    If Mid(ArrNameEmail(i), j, 1) = "#" Then
+                        hashno = j
+                    End If
+                Next
+                Console.Write(Left(ArrNameEmail(i), hashno - 1) & Space(25 - hashno))
+                Console.Write(Right(ArrNameEmail(i), Len(ArrNameEmail(i)) - hashno))
+                Console.WriteLine()
+            End If
         Next
-            Console.ReadLine()
+        Console.ReadLine()
     End Sub
 
 End Module
