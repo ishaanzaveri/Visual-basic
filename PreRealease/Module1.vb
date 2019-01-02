@@ -3,16 +3,26 @@
     Sub Main()
         Dim Name As String
         Dim Email As String
-        Dim ArrNameEmail(3) As String
+        Dim DOB As String
+        Dim StdID As String
+        Dim ArrNameEmail(3, 4) As String
 
 
-        'Task 1.1
+
         For i = 1 To 3
             Console.WriteLine("Enter Name")
             Name = Console.ReadLine()
             Console.WriteLine("Enter Email")
             Email = Console.ReadLine()
-            ArrNameEmail(i) = Name & "#" & Email
+            'ArrNameEmail(i) = Name & "#" & Email 'Task 1.1
+            Console.WriteLine("Enter Date of Birth")
+            DOB = Console.ReadLine()
+            Console.WriteLine("Enter Student ID")
+            StdID = Console.ReadLine()
+            ArrNameEmail(i, 1) = Name
+            ArrNameEmail(i, 2) = Email
+            ArrNameEmail(i, 3) = DOB
+            ArrNameEmail(i, 4) = StdID
         Next
 
         outputting(ArrNameEmail)
