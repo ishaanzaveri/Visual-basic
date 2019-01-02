@@ -35,13 +35,13 @@
     End Sub
 
     Sub outputting(ByVal arrNameEmail) 'task 1.2 
-        Dim hashno As Integer = 0
+        'Dim hashno As Integer = 0
         Console.WriteLine("Name                    Email") '10+5=25
         For i = 1 To 3
-            If arrNameEmail(i) <> "" Then
-                hashno = HashNoFinder(arrNameEmail(i))
-                Console.Write(Left(arrNameEmail(i), hashno - 1) & Space(25 - hashno))
-                Console.Write(Right(arrNameEmail(i), Len(arrNameEmail(i)) - hashno))
+            If arrNameEmail(i, 1) <> "" Then
+                'hashno = HashNoFinder(arrNameEmail(i))
+                Console.Write(arrNameEmail(i, 1) & Space(25 - Len(arrNameEmail(i, 1))))
+                Console.Write(arrNameEmail(i, 2))
                 Console.WriteLine()
             End If
         Next
@@ -53,8 +53,8 @@
         Console.WriteLine("Enter the Name you want to find")
         Name = Console.ReadLine()
         For i = 1 To 3
-            If Left(arrNameEmail(i), Len(Name)) = Name Then
-                Console.WriteLine(Name & "'s email is " & Right(arrNameEmail(i), Len(arrNameEmail(i)) - Len(Name) - 1))
+            If arrNameEmail(i, 1) = Name Then
+                Console.WriteLine(Name & "'s email is " & arrNameEmail(i, 2))
                 found = True
             End If
         Next
@@ -72,28 +72,30 @@
 
         For i = 1 To 3
             found = False
-            For j = 1 To Len(arrNameEmail(i)) - Len(subStr)
-                If subStr = Mid(arrNameEmail(i), j, Len(subStr)) Then
+            For j = 1 To Len(arrNameEmail(i, 1)) - Len(subStr)
+                If subStr = Mid(arrNameEmail(i, 1), j, Len(subStr)) Then
                     frequency = frequency + 1
                     found = True
                 End If
             Next
             If found Then
-                Console.WriteLine(Left(arrNameEmail(i), HashNoFinder(arrNameEmail(i)) - 1))
-            ElseIf frequency < 1 Then
-                Console.WriteLine("Not found")
+                Console.WriteLine(arrNameEmail(i, 1))
             End If
+
         Next
+        If frequency < 1 Then
+            Console.WriteLine("Not found")
+        End If
     End Sub
 
-    Function HashNoFinder(ByRef str) As Integer
-        Dim hash As Integer
-        For j = 1 To Len(str)
-            If Mid(str, j, 1) = "#" Then
-                hash = j
-            End If
-        Next
-        Return hash
-    End Function
+    ' Function HashNoFinder(ByRef str) As Integer
+    'Dim hash As Integer
+    'For j = 1 To Len(str)
+    'If Mid(str, j, 1) = "#" Then
+    '           hash = j
+    'End If
+    'Next
+    'Return hash
+    'End Function
 
 End Module
