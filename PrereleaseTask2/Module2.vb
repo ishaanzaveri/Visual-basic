@@ -6,6 +6,7 @@
         Inputting(FileWriter)
         NameSearch(FileReader)
         SubStrMatch(FileReader)
+        Appened(FileWriter)
         Console.ReadLine()
 
     End Sub
@@ -78,5 +79,24 @@
         Next
         Return hash
     End Function
+    Sub Appened(ByRef FileWriter) ' 2.4
+        FileWriter = New System.IO.StreamWriter("Log.txt", True)
+        Dim Name As String
+        Dim Email As String
+        Dim append As Boolean = True
+        Console.WriteLine("Do you want to append your File, if yes enter the appended data.After you are done appending enter a . as a rouge Values for name and email")
+        Do While append
+            Console.WriteLine("Enter Name")
+            Name = Console.ReadLine()
+            Console.WriteLine("Enter Email")
+            Email = Console.ReadLine()
+            If Name <> "." And Email <> "." Then
+                FileWriter.WriteLine(Name & "#" & Email)
+            Else
+                append = False
+            End If
+        Loop
 
+        FileWriter.Close()
+    End Sub
 End Module
