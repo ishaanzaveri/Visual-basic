@@ -5,10 +5,11 @@
         Dim FileReader As System.IO.StreamReader
         Inputting(FileWriter)
         NameSearch(FileReader)
+        SubStrMatch(FileReader)
         Console.ReadLine()
 
     End Sub
-    Sub Inputting(ByRef FileWriter As IO.StreamWriter)
+    Sub Inputting(ByRef FileWriter As IO.StreamWriter) '2.1
         FileWriter = New System.IO.StreamWriter("Log.txt")
         Dim Name As String
         Dim Email As String
@@ -23,7 +24,7 @@
         Next
         FileWriter.Close()
     End Sub
-    Sub NameSearch(ByRef FileReader)
+    Sub NameSearch(ByRef FileReader) '2.2
         FileReader = New System.IO.StreamReader("Log.txt")
         Dim FileLine As String
         Dim Name As String
@@ -42,4 +43,40 @@
         End If
         FileReader.Close()
     End Sub
+    Sub SubStrMatch(ByRef FileReader) '2.3
+        FileReader = New System.IO.StreamReader("Log.txt")
+        Dim subStr As String
+        Dim FileLine As String
+        Dim frequency As Integer = 0
+        Dim found As Boolean = False
+        Console.WriteLine("Enter Substring")
+        subStr = Console.ReadLine()
+
+        For i = 1 To 3
+            FileLine = FileReader.ReadLine()
+            found = False
+            For j = 1 To Len(FileLine) - Len(subStr)
+                If subStr = Mid(FileLine, j, Len(subStr)) Then
+                    frequency = frequency + 1
+                    found = True
+                End If
+            Next
+            If found Then
+                Console.WriteLine(Left(FileLine, HashNoFinder(FileLine) - 1))
+            ElseIf frequency < 1 Then
+                Console.WriteLine("Not found")
+            End If
+        Next
+        FileReader.Close()
+    End Sub
+    Function HashNoFinder(ByRef str) As Integer
+        Dim hash As Integer
+        For j = 1 To Len(str)
+            If Mid(str, j, 1) = "#" Then
+                hash = j
+            End If
+        Next
+        Return hash
+    End Function
+
 End Module
