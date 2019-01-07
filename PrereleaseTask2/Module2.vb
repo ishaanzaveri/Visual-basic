@@ -1,5 +1,5 @@
 ﻿Module Module1
-
+    Dim NumOfStudents As Integer
     Sub Main()
         Dim FileWriter As System.IO.StreamWriter
         Dim FileReader As System.IO.StreamReader
@@ -17,9 +17,12 @@
         Dim HomeAdd As String
         Dim Tutor As String
 
+        Console.WriteLine("Enter Number of Students")
+        NumOfStudents = Console.ReadLine()
+
         'Task 1.1
-        For i = 1 To 3
-            Console.WriteLine("Enter Name")
+        For i = 1 To NumOfStudents
+            Console.WriteLine("Enter Student ID")
             StdId = Console.ReadLine()
             FileWriter.WriteLine(StdId)
             Console.WriteLine("Enter Email")
@@ -43,7 +46,7 @@
         Dim found As Boolean = False
         Console.WriteLine("Enter the Name you want to find")
         StdID = Console.ReadLine()
-        For i = 1 To 3
+        For i = 1 To NumOfStudents
             FileLine = FileReader.ReadLine()
             If FileLine = StdId Then
                 FileLine = FileReader.ReadLine()
@@ -71,7 +74,7 @@
         Console.WriteLine("Enter Substring")
         subStr = Console.ReadLine()
 
-        For i = 1 To 3
+        For i = 1 To NumOfStudents
             FileLine = FileReader.ReadLine()
             found = False
             For j = 1 To Len(FileLine) - Len(subStr)
