@@ -16,23 +16,44 @@
         Dim Email As String
         Dim HomeAdd As String
         Dim Tutor As String
+        Dim validE As Boolean
+        Dim validS As Boolean
+
 
         Console.WriteLine("Enter Number of Students")
         NumOfStudents = Console.ReadLine()
 
         'Task 1.1
         For i = 1 To NumOfStudents
+            'inputting
             Console.WriteLine("Enter Student ID")
             StdId = Console.ReadLine()
-            FileWriter.WriteLine(StdId)
+            Do
+                validS = ValidStdID(StdId)
+                If Not validS Then
+                    Console.WriteLine("Please enter email again")
+                    StdId = Console.ReadLine()
+                End If
+            Loop Until validS
+
             Console.WriteLine("Enter Email")
             Email = Console.ReadLine()
-            FileWriter.WriteLine(Email)
+            Do
+                validE = ValidEmail(Email)
+                If Not validE Then
+                    Console.WriteLine("Please enter email again")
+                    Email = Console.ReadLine()
+                End If
+            Loop Until validE
+
             Console.WriteLine("Enter Home Adress")
             HomeAdd = Console.ReadLine()
-            FileWriter.WriteLine(HomeAdd)
             Console.WriteLine("Enter tutor")
             Tutor = Console.ReadLine()
+
+            FileWriter.WriteLine(StdId)
+            FileWriter.WriteLine(Email)
+            FileWriter.WriteLine(HomeAdd)
             FileWriter.WriteLine(Tutor)
             'FileWriter.WriteLine(Name & "#" & Email)
             FileWriter.WriteLine() ' 5 lines per person
@@ -132,4 +153,29 @@
 
         FileWriter.Close()
     End Sub
+    Function ValidEmail(email As String) As Boolean
+        Dim valid As Boolean = False
+        Dim chars As Integer = 0
+        For i = 1 To Len(email)
+            If Mid(email, i, 1) = "." Or Mid(email, i, 1) = "@" Then
+                chars = chars + 1
+            End If
+        Next
+        If chars = 2 Then
+            valid = True
+        End If
+        Return valid
+    End Function
+    Function ValidStdID(email As String) As Boolean
+        Dim valid As Boolean = False
+        If Len(email) <> 6 Then
+            valid = False
+        Else
+            If (Mid(email, 1, 1) >= "A" And Mid(email, 1, 1) <= "Z") And (Mid(email, 2, 1) >= "A" And Mid(email, 2, 1) <= "Z") And CInt(Right(email, 4)) <= 9999 Then
+                valid = True
+            End If
+        End If
+
+            Return valid
+    End Function
 End Module
